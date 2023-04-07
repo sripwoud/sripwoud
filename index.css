@@ -1,0 +1,57 @@
+body {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #000;
+  font-family: monospace;
+  font-size: 25px;
+  color: #dbdbdb;
+}
+
+.username {
+  width: 100vh;
+}
+
+ul {
+  display: flex;
+  list-style-type: none;
+}
+
+li {
+  margin: 0 20px;
+}
+/* .logo {
+  width: 100%;
+}
+.jobs {
+  width: 100%;
+} */
+
+.cls-1 {
+  fill: none;
+  stroke: #000;
+  stroke-miterlimit: 10;
+  stroke-width: 5px;
+  stroke-linecap: round;
+  stroke-miterlimit: 10;
+  stroke-dasharray: 1500;
+  animation: lines 4s infinite calc(var(--item) * 1s);
+}
+
+.dot {
+  stroke-dasharray: 500;
+  stroke: var(--color);
+}
+
+.stem {
+  stroke: var(--color);
+}
+
+@keyframes lines {
+  100% {
+    stroke-dashoffset: 3000;
+  }
+}
