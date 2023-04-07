@@ -1,0 +1,14 @@
+[user]
+	name = 3pwd
+	email = me@3pwd.xyz
+
+[core]
+	editor = nano
+	excludesfile = /Users/username/.gitignore
+	autocrlf = input
+
+[commit]
+	gpgsign = true
+
+[pull]
+	ff = only

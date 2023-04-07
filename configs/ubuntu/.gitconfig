@@ -1,0 +1,7 @@
+[user]
+	name = 3pwd
+	email = me@3pwd.xyz
+[pull]
+	ff = only
+[init]
+	defaultBranch = main
