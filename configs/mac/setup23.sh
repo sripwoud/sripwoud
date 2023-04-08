@@ -26,6 +26,12 @@ install() {
 	readonly app=$1
 
 	case $app in
+	Docker.dmg)
+		sudo hdiutil attach Docker.dmg
+		sudo /Volumes/Docker/Docker.app/Contents/MacOS/install
+		sudo hdiutil detach /Volumes/Docker
+		;;
+
 	*.dmg)
 		volume=$(sudo hdiutil attach "$1" | grep Volumes | cut -f 3)
 		for app in "$volume"/*(.app|.pkg); do
@@ -100,9 +106,19 @@ main() {
 
 	rm -rf /tmp/installers
 
-	# docker
-	# foundry
+	# Foundry
+curl -L https://foundry.paradigm.xyz | bash
+source "$HOME"/.zshrc
+foundryup
+
 	# circom
+	tempdir=$(mktemp -d)
+	git clone https://github.com/iden3/circom.git "$tempdir"
+	cd "$tempdir"
+	cargo build --release
+	cargo install --path circom
+	cd ~
+	rm -rf "$tempdir"
 
 	get_common_config_files
 	get_mac_config_files
