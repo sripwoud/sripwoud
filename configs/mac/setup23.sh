@@ -2,9 +2,9 @@ set -o errexit
 
 get_extra_urls() {
 	{
-		echo "https://updates.signal.org/desktop/$(curl -s https://updates.signal.org/desktop/latest-mac.yml | dasel -r yaml 'files.[2].url')";
-		curl -s https://api.github.com/repos/balena-io/etcher/releases/latest | dasel -r json 'assets.all().browser_download_url' | grep 'dmg"' | cut -d '"' -f 2;
-		curl -s https://api.github.com/repos/standardnotes/app/releases/latest | dasel -r json 'assets.all().browser_download_url' | grep 'x64.dmg"' | cut -d '"' -f 2;
+		echo "https://updates.signal.org/desktop/$(curl -s https://updates.signal.org/desktop/latest-mac.yml | dasel -r yaml 'files.[2].url')"
+		curl -s https://api.github.com/repos/balena-io/etcher/releases/latest | dasel -r json 'assets.all().browser_download_url' | grep 'dmg"' | cut -d '"' -f 2
+		curl -s https://api.github.com/repos/standardnotes/app/releases/latest | dasel -r json 'assets.all().browser_download_url' | grep 'x64.dmg"' | cut -d '"' -f 2
 		curl -s -G "https://data.services.jetbrains.com/products/releases" -d "code=TBA" -d "latest=true" | dasel -r json "TBA.[0].downloads.mac.link" | tr -d '"'
 	} >>/tmp/installers/list
 }
@@ -22,19 +22,50 @@ get_installers() {
 	download_installers
 }
 
-function install_dmg {
-    volume=$(sudo hdiutil attach "$1" | grep Volumes | cut -f 3)
+install() {
+	readonly app=$1
 
-    for app in "$volume"/*(.app|.pkg); do
-      case $app in
-        *.app) sudo cp -rf "$app" /Applications ;;
-        *.pkg)
-          sudo installer -pkg "$app" -target / ;;
-      esac
-    done
+	case $app in
+	*.dmg)
+		volume=$(sudo hdiutil attach "$1" | grep Volumes | cut -f 3)
+		for app in "$volume"/*(.app|.pkg); do
+			install "$app"
+		done
+		sudo hdiutil detach "$volume"
+		;;
 
-    sudo hdiutil detach "$volume"
-    rm -rf "$1"
+	*.app)
+		cp -rf "$app" /Applications
+		;;
+
+	*.pkg)
+		sudo installer -pkg "$app" -target /
+		;;
+
+	*.zip)
+		tempdir=$(mktemp -d)
+		unzip "$app" -d "$tempdir" >/dev/null
+		for app in "$tempdir"/*(.app|.pkg); do
+			install "$app"
+		done
+		rm -rf "$tempdir"
+		;;
+
+	esac
+}
+
+configs_url="https://raw.githubusercontent.com/3pwd/3pwd/master/configs"
+
+get_common_config_files() {
+	for file in .default-npm-packages .gitignore .npmrc .prettierignore .prettierrc.yaml; do
+		curl -o "$HOME/$file" -fsS "$configs_url/common/$file"
+	done
+}
+
+get_mac_config_files() {
+	for file in .gitconfig .gitignore .zshrc; do
+		curl -o "$HOME/$file" -fsS "$configs_url/mac/$file"
+	done
 }
 
 main() {
@@ -63,16 +94,20 @@ main() {
 
 	get_installers
 
-	for app in /tmp/installers/*(.tar.gz|.zip|.dmg); do
-    case $app in
-      *.dmg)
-        install_dmg "$app" ;;
-      *.tar.gz)
-        tar -xzf "$app" -C /tmp >/dev/null ;;
-      *.zip)
-        unzip "$app" -d /tmp >/dev/null ;;
-    esac
-  done
+	for app in /tmp/installers/*(.app|.dmg|.pkg|.zip); do
+		install "$app"
+	done
+
+	rm -rf /tmp/installers
+
+	# docker
+	# foundry
+	# circom
+
+	get_common_config_files
+	get_mac_config_files
+
+	mkdir -p ~/.{pyenvs,vpn}
 }
 
 main "$@"
