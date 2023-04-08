@@ -1,6 +1,5 @@
-gh
+coreutils
 gnupg
 hashicorp/tap/hashicorp-vagrant
 jq
 pinentry-mac
-shfmt
