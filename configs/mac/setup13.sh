@@ -4,4 +4,3 @@ curl -fsS https://raw.githubusercontent.com/3pwd/3pwd/master/configs/mac/brew | 
 
 # Zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
