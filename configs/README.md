@@ -5,8 +5,8 @@ See [setup.sh](ubuntu/setup13.sh) and [flatpak_apps.sh](ubuntu/flatpak_apps.sh):
    curl https://raw.githubusercontent.com/3pwd/3pwd/master/configs/ubuntu/setup.sh | sh
    ```
 - MacOS:
-   ```
-   TODO
+   ```shell
+   curl https://raw.githubusercontent.com/3pwd/3pwd/master/configs/mac/setup.sh | sh
    ```
 
 1. Config git

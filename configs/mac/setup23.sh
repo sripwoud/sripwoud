@@ -17,7 +17,7 @@ download_installers() {
 
 get_installers() {
 	mkdir -p /tmp/installers
-	curl -fSL https://raw.githubusercontent.com/3pwd/3pwd/mac/configs/mac/installers -o /tmp/installers/list
+	curl -fSL https://raw.githubusercontent.com/3pwd/3pwd/main/configs/mac/installers -o /tmp/installers/list
 	get_extra_urls
 	download_installers
 }
@@ -96,7 +96,7 @@ main() {
 		asdf plugin-add "$plugin"
 		asdf install "$plugin" latest
 		asdf global "$plugin" latest
-	done <asdf-plugins
+	done <"$(curl -fsS https://raw.githubusercontent.com/3pwd/3pwd/main/configs/mac/asdf-plugins)"
 
 	get_installers
 
