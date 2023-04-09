@@ -68,17 +68,9 @@ install() {
   esac
 }
 
-configs_url="https://raw.githubusercontent.com/3pwd/3pwd/master/configs"
-
-get_common_config_files() {
-  for file in .default-npm-packages .gitignore .npmrc .prettierignore .prettierrc.yaml; do
-    curl -o "$HOME/$file" -fsS "$configs_url/common/$file"
-  done
-}
-
 get_mac_config_files() {
   for file in .gitconfig .gitignore .zshrc; do
-    curl -o "$HOME/$file" -fsS "$configs_url/mac/$file"
+    curl -o "$HOME/$file" -fsS "https://raw.githubusercontent.com/3pwd/3pwd/master/configs/mac/$file"
   done
 }
 
