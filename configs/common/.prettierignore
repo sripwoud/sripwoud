@@ -1,10 +1,20 @@
 node_modules
 pnpm-lock.yaml
+yarn.lock
+package-lock.json
 
 dist
 build
 
-# Jest
 coverage
 
 .idea
+.DS_Store
+
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+

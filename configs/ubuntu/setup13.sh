@@ -1,7 +1,6 @@
 # Git
 sudo apt install git -y
 curl https://github.com/web-flow.gpg | gpg --import
-#git config --global commit.gpgsign true
 
 # Zsh
 sudo apt install zsh -y
