@@ -9,14 +9,14 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 
 # GitHub CLI
 type -p curl >/dev/null || sudo apt install curl -y
-curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
-&& sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
-&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
-&& sudo apt update \
-&& sudo apt install gh -y
+curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg &&
+	sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg &&
+	echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list >/dev/null &&
+	sudo apt update &&
+	sudo apt install gh -y
 
 # Dasel
-sudo mkdir /opt/bin 
+sudo mkdir /opt/bin
 curl -o /opt/bin/dasel -sSfL https://github.com/TomWright/dasel/releases/latest/download/dasel_linux_amd64
 sudo chmod +x /opt/bin/dasel
 
@@ -75,32 +75,29 @@ curl -L https://fly.io/install.sh | sh
 
 # Some other tools/utils
 sudo apt install -y \
-chrome-gnome-shell \
-gnome-control-center \
-gnome-software \
-gnome-tweaks \
-kubectl \
-ripgrep\
-rsync \
-xsel \
-tilix \
-tree \
-unar \
-xdg-desktop-portal-gtk # required to open links in flatpak apps (eg discord chat links)
+	chrome-gnome-shell \
+	gnome-control-center \
+	gnome-software \
+	gnome-tweaks \
+	kubectl \
+	ripgreprsync \
+	xsel \
+	tilix \
+	tree \
+	unar \
+	xdg-desktop-portal-gtk # required to open links in flatpak apps (eg discord chat links)
 
 sudo update-alternatives --config x-terminal-emulator
 
 # Global config files/folders
 url="https://raw.githubusercontent.com/3pwd/3pwd/master/configs"
 
-for file in .default-npm-packages .gitignore .npmrc .prettierignore .prettierrc.yaml
-do
-  curl -o "$HOME/$file" -fsS "$url/common/$file"
+for file in .default-npm-packages .gitignore .npmrc .prettierignore .prettierrc.yaml; do
+	curl -o "$HOME/$file" -fsS "$url/common/$file"
 done
 
-for file in .gitconfig .zshenv .zshrc
-do
-  curl -o "$HOME/$file" -fsS "$url/ubuntu/$file"
+for file in .gitconfig .zshenv .zshrc; do
+	curl -o "$HOME/$file" -fsS "$url/ubuntu/$file"
 done
 
 curl -o "$ZSH/custom/alias.zsh" -fsS "$url/ubuntu/alias.zsh"
