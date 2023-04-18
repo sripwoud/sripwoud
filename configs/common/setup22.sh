@@ -20,7 +20,9 @@ install_asdf() {
   git clone https://github.com/asdf-vm/asdf.git ~/.asdf
   touch ~/.tool-versions
   while read -r plugin; do
-    asdf plugin-add "$plugin"
+    # allow word splitting
+    # shellcheck disable=SC2086
+    asdf plugin add $plugin
     asdf install "$plugin" latest
     asdf global "$plugin" latest
   done <"$(curl -fsS https://raw.githubusercontent.com/3pwd/3pwd/main/configs/common/asdf-plugins)"
