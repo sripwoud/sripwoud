@@ -2,8 +2,8 @@
 
 
 <p align="center">
-    <img alt="GH Stats" src="https://github-readme-stats.vercel.app/api/top-langs?username=3pwd&count_private=true&hide=html,jupyter+notebook,tex,css,vue,scss&locale=en&layout=compact&hide_border=true&hide_title=true">
-    <img alt="GH Top Languages" src="https://github-readme-stats.vercel.app/api?username=3pwd&include_all_commits=true&count_private=true&hide_title=true&hide_border=true&show_icons=true&icon_color=eb4c5c&title_color=eb4c5c&text_color=282a38&hide=contribs,issues">
+    <img alt="GH Stats" src="https://github-readme-stats.vercel.app/api/top-langs?username=3pwd&count_private=true&hide=html,jupyter+notebook,tex,css,vue,scss&locale=en&layout=compact&hide_border=true&hide_title=true&text_color=d000e8">
+    <img alt="GH Top Languages" src="https://github-readme-stats.vercel.app/api?username=3pwd&include_all_commits=true&count_private=true&hide_title=true&hide_border=true&show_icons=true&icon_color=908dff&title_color=120548&text_color=d000e8&hide=contribs,issues">
 </p>
 
 
