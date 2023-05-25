@@ -10,3 +10,5 @@ python
 rust https://github.com/code-lever/asdf-rust.git
 shfmt
 yarn
+aws-iam-authenticator https://github.com/zekker6/asdf-aws-iam-authenticator
+helm https://github.com/Antiarchitect/asdf-helm.git
