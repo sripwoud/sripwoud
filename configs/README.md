@@ -2,10 +2,12 @@
 See [setup.sh](ubuntu/setup13.sh) and [flatpak_apps.sh](ubuntu/flatpak_apps.sh):
 - Linux (Ubuntu/Debian)
    ```shell
+   curl https://raw.githubusercontent.com/3pwd/3pwd/master/configs/common/setup.sh | sh &&\
    curl https://raw.githubusercontent.com/3pwd/3pwd/master/configs/ubuntu/setup.sh | sh
    ```
 - MacOS:
    ```shell
+   curl https://raw.githubusercontent.com/3pwd/3pwd/master/configs/common/setup.sh | sh &&\
    curl https://raw.githubusercontent.com/3pwd/3pwd/master/configs/mac/setup.sh | sh
    ```
 
