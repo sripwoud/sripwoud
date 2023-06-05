@@ -1,39 +1,4 @@
-set -o errexit
-
-install_circom() {
-  tempdir=$(mktemp -d)
-  git clone https://github.com/iden3/circom.git "$tempdir"
-  cd tempdir
-  cargo build --release
-  cargo install --path circom
-  cd ~
-  rm -rf tempdir
-}
-
-install_foundry() {
-  curl -L https://foundry.paradigm.xyz | bash
-  source "$HOME"/.zshrc
-  foundryup
-}
-
-install_asdf() {
-  git clone https://github.com/asdf-vm/asdf.git ~/.asdf
-  touch ~/.tool-versions
-  while read -r plugin; do
-    # allow word splitting
-    # shellcheck disable=SC2086
-    asdf plugin add $plugin
-    asdf install "$plugin" latest
-    asdf global "$plugin" latest
-  done <"$(curl -fsS https://raw.githubusercontent.com/3pwd/3pwd/main/configs/common/asdf-plugins)"
-
-}
-
-get_common_config_files() {
-  for file in .default-npm-packages .gitignore .npmrc .prettierignore .prettierrc.yaml; do
-    curl -o "$HOME/$file" -fsS "https://raw.githubusercontent.com/3pwd/3pwd/master/configs/common/$file"
-  done
-}
+set -e
 
 add_zsh_syntax_highlighting() {
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
@@ -42,11 +7,56 @@ add_zsh_syntax_highlighting() {
 install_spaceship_prompt() {
   git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
   ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+}
 
+install_asdf() {
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf
+  touch ~/.tool-versions
+
+  tmp_file=$(mktemp)
+  curl -fsS https://raw.githubusercontent.com/3pwd/3pwd/main/configs/common/asdf-plugins >"$tmp_file"
+  while read -r line; do
+    args=("$line")
+    plugin=${args[0]}
+    url=${args[1]}
+    branch=${args[2]}
+
+    [[ -n $url ]] && asdf plugin add "$plugin" "$url" | asdf plugin add "$plugin"
+    [[ -n $branch ]] && asdf plugin update "$plugin" "$branch"
+    asdf install "$plugin" latest
+    asdf global "$plugin" latest
+  done <"$tmp_file"
+
+  rm "$tmp_file"
+}
+
+install_circom() {
+  temp_dir=$(mktemp -d)
+  git clone https://github.com/iden3/circom.git "$temp_dir"
+  cd "$temp_dir"
+  cargo build --release
+  cargo install --path circom
+  cd ~
+  rm -rf "$temp_dir"
+}
+
+install_foundry() {
+  curl -L https://foundry.paradigm.xyz | bash
+  source "$HOME"/.zshrc
+  foundryup
+}
+
+get_common_config_files() {
+  for file in .default-npm-packages .gitignore .npmrc .prettierignore .prettierrc.yaml; do
+    curl -o "$HOME/$file" -fsS "https://raw.githubusercontent.com/3pwd/3pwd/master/configs/common/$file"
+  done
+
+  mkdir -p "$ZSH_CUSTOM"/plugins/sha256
+  curl -o "$ZSH_CUSTOM"/plugins/sha256/sha256.plugin.zsh -fsS "https://raw.githubusercontent.com/3pwd/3pwd/master/configs/common/sha256.zsh"
 }
 
 config_gpg() {
-  gpg --full-generate-key --allow-freeform-uid
+  gpg --full-generate-key --allow-freeform-uid --expert
   gpg --list-secret-keys --keyid-format LONG
 
   read -r -p "Enter the gpg key ID: " key_id
@@ -85,6 +95,7 @@ main() {
   mkdir ~/.{pyenvs,vpn}
   get_common_config_files
   gh auth login
+  gh auth refresh -s write:gpg_key
   config_gpg
   config_ssh
 }

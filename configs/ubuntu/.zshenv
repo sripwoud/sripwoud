@@ -1,5 +1,7 @@
 export PATH=/opt/bin:$PATH
 export ZSH="$HOME/.oh-my-zsh"
+export FLYCTL_INSTALL="/home/tpwd/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
 
 # User configuration
 
@@ -18,6 +20,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-. "$HOME/.cargo/env"
+# managed by asdf
+# . "$HOME/.cargo/env"
+
 
 

@@ -1,0 +1,14 @@
+apt-transport-https
+build-essential
+curl
+flatpak
+fonts-firacode
+gnome-software-plugin-flatpak
+git
+jq
+ps2pdf
+ripgrep
+rsync
+tilix
+xsel
+zsh
