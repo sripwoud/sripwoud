@@ -35,6 +35,12 @@ install_flyctl() {
   curl -L https://fly.io/install.sh | sh
 }
 
+install_keybase() {
+  curl --remote-name https://prerelease.keybase.io/keybase_amd64.deb
+  sudo apt install ./keybase_amd64.deb -y
+  rm keybase_amd64.deb
+}
+
 fix_discord() {
   cat >"$HOME"/.var/app/com.discordapp.Discord/config/discord/settings.json <<EOF
 {
