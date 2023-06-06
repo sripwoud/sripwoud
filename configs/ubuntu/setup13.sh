@@ -19,6 +19,7 @@ main() {
 
   chsh -s "$(which zsh)"
 
+  # oh my zsh, asdf, circom, foundry, config files, gpg setup, ssh setup
   sudo curl -fsS "$url"/common/setup.sh | sh
 
   curl -o "$HOME/.oh-my-zsh/custom/alias.zsh" -fsS "$url/alias.zsh"

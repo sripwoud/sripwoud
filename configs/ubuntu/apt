@@ -5,6 +5,8 @@ flatpak
 fonts-firacode
 gnome-software-plugin-flatpak
 git
+gnupg-agent
+pinentry-gnome3
 jq
 ps2pdf
 ripgrep

@@ -60,6 +60,8 @@ config_gpg() {
   gpg --list-secret-keys --keyid-format LONG
 
   read -r -p "Enter the gpg key ID: " key_id
+  git config --global user.signingkey "$key_id"
+
   read -r -p "Enter title for gpg key on GitHub: " title
   gpg --armor --export "$key_id" | gh gpg-key add -t "$title"
   curl https://github.com/web-flow.gpg | gpg --import
