@@ -4,6 +4,8 @@ set -e
 
 install_apt_pkgs() {
   sudo add-apt-repository universe # required for fira-code font
+  sudo add-apt-repository ppa:appimagelauncher-team/stable
+  sudo apt update
   curl -fsS "$url"/ubuntu/apt | sudo xargs apt install -y
 }
 
