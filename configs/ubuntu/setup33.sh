@@ -20,6 +20,10 @@ install_jetbrains_toolbox() {
   mkdir -p /opt/bin
   sudo mv $filename /opt/bin/$filename
   rm "$filename"_archive
+
+
+ # after pycharm install
+ # sudo ln -s ~/.local/share/JetBrains/toolbox/scripts/pycharm /opt/bin/pycharm
 }
 
 install_nordvpn() {
