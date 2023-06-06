@@ -4,10 +4,10 @@ install_flatpak_apps() {
   flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
   tmp_file=$(mktemp)
-  curl -fsS "$url"/flatpakrefs > "$tmp_file"
+  curl -fsS "$url"/flatpakrefs >"$tmp_file"
   while read -r flatpakref; do
     flatpak install -y "$flatpakref"
-  done < "$tmp_file"
+  done <"$tmp_file"
   rm "$tmp_file"
 }
 
@@ -16,20 +16,29 @@ install_jetbrains_toolbox() {
   url=$(curl -sG "https://data.services.jetbrains.com/products/releases" -d "code=TBA" -d "latest=true" | dasel -r json "TBA.[0].downloads.linux.link" | tr -d '"')
   curl -o "$filename"_archive -fsSL "$url"
   tar xf "$filename"_archive --strip-components 1
-  
+
   mkdir -p /opt/bin
   sudo mv $filename /opt/bin/$filename
   rm "$filename"_archive
 }
 
-
 install_nordvpn() {
   sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh)
-#  usermod -aG nordvpn "$USER"
+  #  usermod -aG nordvpn "$USER"
 }
 
 install_flyctl() {
   curl -L https://fly.io/install.sh | sh
+}
+
+fix_discord() {
+  cat >"$HOME"/.var/app/com.discordapp.Discord/config/discord/settings.json <<EOF
+{
+  "SKIP_HOST_UPDATE": true,
+  "MIN_WIDTH": 100,
+  "MIN_HEIGHT": 100,
+}
+EOF
 }
 
 clean_up() {
