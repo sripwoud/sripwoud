@@ -67,9 +67,10 @@ plugins=(
  dotenv
  git
  gh
+ kubectl
  history
  sudo
- ubuntu
+ ubuntu # apt aliases
  z
  zsh-syntax-highlighting 
 )
