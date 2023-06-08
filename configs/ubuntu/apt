@@ -6,6 +6,7 @@ flatpak
 fonts-firacode
 gnome-software-plugin-flatpak
 git
+gnome-tweaks
 gnupg-agent
 pinentry-gnome3
 jq
