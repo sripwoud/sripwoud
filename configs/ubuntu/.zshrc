@@ -65,6 +65,7 @@ plugins=(
  asdf
  cp
  dotenv
+ gcloud
  git
  gh
  kubectl
