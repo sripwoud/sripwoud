@@ -21,9 +21,13 @@ install_jetbrains_toolbox() {
   sudo mv $filename /opt/bin/$filename
   rm "$filename"_archive
 
-
- # after pycharm install
- # sudo ln -s ~/.local/share/JetBrains/toolbox/scripts/pycharm /opt/bin/pycharm
+  # increase inotify watches limit
+  # https://youtrack.jetbrains.com/articles/IDEA-A-2/Inotify-Watches-Limit-Linux
+  sudo echo "fs.inotify.max_user_watches = 524288" > /etc/sysctl.d/idea.conf
+  sudo sysctl -p --system
+  
+  # after pycharm install
+  # sudo ln -s ~/.local/share/JetBrains/toolbox/scripts/pycharm /opt/bin/pycharm
 }
 
 install_nordvpn() {
