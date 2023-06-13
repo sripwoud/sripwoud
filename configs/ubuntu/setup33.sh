@@ -43,6 +43,11 @@ install_keybase() {
   curl --remote-name https://prerelease.keybase.io/keybase_amd64.deb
   sudo apt install ./keybase_amd64.deb -y
   rm keybase_amd64.deb
+  # FIXME: this installs keybase using the deprecated keyring
+  # needs to do
+  # sudo apt-key list
+  # sudo apt-key export <keylast8digits> | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/keybase.gpg
+  # sudo apt-key del <keylast8digits>
 }
 
 fix_discord() {
