@@ -84,7 +84,6 @@ main() {
   sudo apt install brave-browser virtualbox-6.1 vagrant -y
   install_flatpak_apps
   install_fira_code_font
-  install_gh_cli
   install_nordvpn
   install_jetbrains_toolbox
   install_vagrant
