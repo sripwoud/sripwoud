@@ -35,10 +35,6 @@ install_nordvpn() {
   #  usermod -aG nordvpn "$USER"
 }
 
-install_flyctl() {
-  curl -L https://fly.io/install.sh | sh
-}
-
 install_keybase() {
   curl --remote-name https://prerelease.keybase.io/keybase_amd64.deb
   sudo apt install ./keybase_amd64.deb -y
@@ -88,7 +84,6 @@ main() {
   sudo apt install brave-browser virtualbox-6.1 vagrant -y
   install_flatpak_apps
   install_fira_code_font
-  install_flyctl
   install_gh_cli
   install_nordvpn
   install_jetbrains_toolbox
