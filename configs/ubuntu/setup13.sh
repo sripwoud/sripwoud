@@ -16,7 +16,7 @@ get_ubuntu_config_files() {
 }
 
 main() {
-  local url=https://raw.githubusercontent.com/3pwd/3pwd/master/configs
+  local url=https://raw.githubusercontent.com/sripwoud/sripwoud/master/configs
   install_apt_pkgs
 
   chsh -s "$(which zsh)"

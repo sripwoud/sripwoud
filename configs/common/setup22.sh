@@ -14,7 +14,7 @@ install_asdf() {
   touch ~/.tool-versions
 
   tmp_file=$(mktemp)
-  curl -fsS https://raw.githubusercontent.com/3pwd/3pwd/main/configs/common/asdf-plugins >"$tmp_file"
+  curl -fsS https://raw.githubusercontent.com/sripwoud/sripwoud/main/configs/common/asdf-plugins >"$tmp_file"
   while read -r line; do
     args=("$line")
     plugin=${args[0]}
@@ -48,11 +48,11 @@ install_foundry() {
 
 get_common_config_files() {
   for file in .default-npm-packages .gitignore .npmrc .prettierignore .prettierrc.yaml; do
-    curl -o "$HOME/$file" -fsS "https://raw.githubusercontent.com/3pwd/3pwd/master/configs/common/$file"
+    curl -o "$HOME/$file" -fsS "https://raw.githubusercontent.com/sripwoud/sripwoud/master/configs/common/$file"
   done
 
   mkdir -p "$ZSH_CUSTOM"/plugins/sha256
-  curl -o "$ZSH_CUSTOM"/plugins/sha256/sha256.plugin.zsh -fsS "https://raw.githubusercontent.com/3pwd/3pwd/master/configs/common/sha256.zsh"
+  curl -o "$ZSH_CUSTOM"/plugins/sha256/sha256.plugin.zsh -fsS "https://raw.githubusercontent.com/sripwoud/sripwoud/master/configs/common/sha256.zsh"
 }
 
 config_gpg() {

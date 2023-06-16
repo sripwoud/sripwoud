@@ -25,7 +25,7 @@ download_installers() {
 
 get_installers() {
   mkdir -p /tmp/installers
-  curl -fSL https://raw.githubusercontent.com/3pwd/3pwd/main/configs/mac/installers -o /tmp/installers/list
+  curl -fSL https://raw.githubusercontent.com/sripwoud/sripwoud/main/configs/mac/installers -o /tmp/installers/list
   get_extra_urls
   download_installers
 }
@@ -70,7 +70,7 @@ install() {
 
 get_mac_config_files() {
   for file in .gitconfig .gitignore .zshrc; do
-    curl -o "$HOME/$file" -fsS "https://raw.githubusercontent.com/3pwd/3pwd/master/configs/mac/$file"
+    curl -o "$HOME/$file" -fsS "https://raw.githubusercontent.com/sripwoud/sripwoud/master/configs/mac/$file"
   done
 }
 

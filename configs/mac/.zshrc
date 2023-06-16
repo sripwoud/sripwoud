@@ -79,12 +79,12 @@ bindkey "^[^[[D" backward-word # ??? + ???
 bindkey "^[^[[C" forward-word  # ??? + ???
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/3pwd/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/3pwd/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/Users/sripwoud/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/sripwoud/Downloads/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/3pwd/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/3pwd/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/Users/sripwoud/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/sripwoud/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 # pnpm
-export PNPM_HOME="/Users/3pwd/Library/pnpm"
+export PNPM_HOME="/Users/sripwoud/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end

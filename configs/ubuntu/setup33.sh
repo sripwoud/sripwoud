@@ -64,7 +64,7 @@ clean_up() {
 }
 
 main() {
-  local url=https://raw.githubusercontent.com/3pwd/3pwd/main/configs/ubuntu
+  local url=https://raw.githubusercontent.com/sripwoud/sripwoud/main/configs/ubuntu
   # Grant permissions for docker process and file levels
   sudo chmod a+rwx /var/run/docker.sock
   sudo chmod a+rwx /var/run/docker.pid

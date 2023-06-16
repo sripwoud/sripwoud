@@ -2,7 +2,7 @@ set -e
 
 main() {
   for i in {1..3}; do
-    curl -fsS https://raw.githubusercontent.com/3pwd/3pwd/master/configs/ubuntu/setup"$i"3.sh | sh
+    curl -fsS https://raw.githubusercontent.com/sripwoud/sripwoud/master/configs/ubuntu/setup"$i"3.sh | sh
   done
 }
 
