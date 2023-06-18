@@ -68,8 +68,9 @@ plugins=(
  gcloud
  git
  gh
- kubectl
  history
+ kubectl
+ sha256
  sudo
  ubuntu # apt aliases
  z
@@ -77,3 +78,4 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
+
