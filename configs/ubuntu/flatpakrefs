@@ -1,4 +1,5 @@
 com.calibre_ebook.calibre
+org.chromium.Chromium 
 com.discordapp.Discord
 com.github.jeromerobert.pdfarranger
 org.gnome.DejaDup
@@ -7,4 +8,6 @@ org.signal.Signal
 com.slack.Slack
 com.spotify.Client
 org.standardnotes.standardnotes
+org.telegram.desktop
+us.zoom.Zoom
 
