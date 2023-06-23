@@ -91,11 +91,11 @@ config_ssh() {
 main() {
   install_spaceship_prompt
   add_zsh_syntax_highlighting
+  get_common_config_files
   install_asdf # asdf is an oh my zsh plugin, and rust is included in asdf plugins
   install_foundry
   install_circom
   mkdir ~/.{pyenvs,vpn}
-  get_common_config_files
   gh auth login
   gh auth refresh -s write:gpg_key
   config_gpg
