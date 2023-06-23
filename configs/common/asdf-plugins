@@ -9,9 +9,7 @@ helm https://github.com/Antiarchitect/asdf-helm.git
 kind https://github.com/reegnz/asdf-kind.git
 kubectl https://github.com/asdf-community/asdf-kubectl.git
 nodejs https://github.com/asdf-vm/asdf-nodejs.git
-pnpm
 pulumi https://github.com/canha/asdf-pulumi.git
 python
 rust https://github.com/code-lever/asdf-rust.git
 shfmt
-yarn
