@@ -1,5 +1,7 @@
 #!/bin/bash
-set -o errexit
+
+set -e
+shopt -s extglob
 
 install_fira_code_font() {
   curl -fsSL https://github.com/tonsky/FiraCode/releases/download/6.2/Fira_Code_v6.2.zip -o /tmp/Fira_Code_v6.2.zip
@@ -31,9 +33,7 @@ get_installers() {
 }
 
 install() {
-  readonly app="$1"
-
-  case $app in
+  case "$1" in
   Docker.dmg)
     sudo hdiutil attach Docker.dmg
     sudo /Volumes/Docker/Docker.app/Contents/MacOS/install
@@ -42,36 +42,41 @@ install() {
 
   *.dmg)
     volume=$(sudo hdiutil attach "$1" | grep Volumes | cut -f 3)
-    for app in "$volume"/*(.app|.pkg); do
-      install "$app"
-    done
+
+    find "$volume" ! -name "$(printf "*\n*")" -name "*.app" -o -name "*.pkg" -maxdepth 1 > tmp
+
+    while IFS= read -r app; do
+      echo "installing $app" && install "$app"
+    done < tmp
+
+    rm tmp
     sudo hdiutil detach "$volume"
     ;;
 
   *.app)
-    cp -rf "$app" /Applications
+    cp -R "$1" /Applications
+    sudo xattr -rd com.apple.quarantine "/Applications/$(basename "$1")"
     ;;
 
   *.pkg)
-    sudo installer -pkg "$app" -target /
+    sudo installer -pkg "$1" -target /
     ;;
 
   *.zip)
     tempdir=$(mktemp -d)
-    unzip "$app" -d "$tempdir" >/dev/null
-    for app in "$tempdir"/*(.app|.pkg); do
-      install "$app"
-    done
+    unzip "$1" -d "$tempdir" >/dev/null
+
+    find "$tempdir" ! -name "$(printf "*\n*")" -name "*.app" -o -name "*.pkg" -maxdepth 1 > tmp
+
+    while IFS= read -r app; do
+      echo " installing $app" && install "$app"
+    done < tmp
+
+    rm tmp
     rm -rf "$tempdir"
     ;;
 
   esac
-}
-
-get_mac_config_files() {
-  for file in .gitconfig .gitignore .zshrc; do
-    curl -o "$HOME/$file" -fsS "https://raw.githubusercontent.com/sripwoud/sripwoud/master/configs/mac/$file"
-  done
 }
 
 main() {
@@ -82,8 +87,6 @@ main() {
     install "$app"
   done
   rm -rf /tmp/installers
-
-  get_mac_config_files
 }
 
 main "$@"
