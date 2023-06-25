@@ -1,12 +1,12 @@
 set -e
 
 install_spaceship_prompt() {
-  git clone https://github.com/spaceship-prompt/spaceship-prompt.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/spaceship-prompt" --depth=1
-  ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/spaceship.zsh-theme"
+  git clone https://github.com/spaceship-prompt/spaceship-prompt.git "${$HOME/.oh-my-zsh/custom}/themes/spaceship-prompt" --depth=1
+  ln -s "${$HOME/.oh-my-zsh/custom}/themes/spaceship-prompt/spaceship.zsh-theme" "${$HOME/.oh-my-zsh/custom}/themes/spaceship.zsh-theme"
 }
 
 add_zsh_syntax_highlighting() {
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${$HOME/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
 }
 
 install_asdf() {
@@ -51,8 +51,23 @@ get_common_config_files() {
     curl -o "$HOME/$file" -fsS "https://raw.githubusercontent.com/sripwoud/sripwoud/master/configs/common/$file"
   done
 
-  mkdir -p "$ZSH_CUSTOM"/plugins/sha256
-  curl -o "$ZSH_CUSTOM"/plugins/sha256/sha256.plugin.zsh -fsS "https://raw.githubusercontent.com/sripwoud/sripwoud/master/configs/common/sha256.zsh"
+  mkdir -p "${$HOME/.oh-my-zsh/custom}"/plugins/sha256
+  curl -o "${$HOME/.oh-my-zsh/custom}"/plugins/sha256/sha256.plugin.zsh -fsS "https://raw.githubusercontent.com/sripwoud/sripwoud/master/configs/common/sha256.zsh"
+}
+
+config_ssh() {
+  gh auth login
+  eval "$(ssh-agent -s)"
+
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+    echo "Host github.com
+     AddKeysToAgent yes
+     UseKeychain yes
+     IdentityFile ~/.ssh/id_ed25519" >>~/.ssh/config
+  else
+    ssh-add ~/.ssh/id_ed25519
+  fi
 }
 
 config_gpg() {
