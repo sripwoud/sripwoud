@@ -16,7 +16,7 @@ install_asdf() {
   tmp_file=$(mktemp)
   curl -fsS https://raw.githubusercontent.com/sripwoud/sripwoud/main/configs/common/asdf-plugins >"$tmp_file"
   while read -r line; do
-    args=("$line")
+    read -ra args <<< "$line"
     plugin=${args[0]}
     url=${args[1]}
     branch=${args[2]}
