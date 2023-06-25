@@ -15,6 +15,7 @@ install_asdf() {
 
   tmp_file=$(mktemp)
   curl -fsS https://raw.githubusercontent.com/sripwoud/sripwoud/main/configs/common/asdf-plugins >"$tmp_file"
+
   while read -r line; do
     read -ra args <<< "$line"
     plugin=${args[0]}
@@ -71,6 +72,8 @@ config_ssh() {
 }
 
 config_gpg() {
+  gh auth refresh -s write:gpg_key
+
   gpg --full-generate-key --allow-freeform-uid --expert
   gpg --list-secret-keys --keyid-format LONG
 
@@ -82,27 +85,6 @@ config_gpg() {
   curl https://github.com/web-flow.gpg | gpg --import
 }
 
-config_ssh() {
-  read -r -p "Enter the email address for ssh key: " email
-  ssh-keygen -t ed25519 -C "$email"
-  eval "$(ssh-agent -s)"
-
-  read -r -p "Enter the filename of your created ssh key: " ssh_filename
-
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    ssh-add --apple-use-keychain ~/.ssh/"$ssh_filename"
-    echo "Host github.com
-     AddKeysToAgent yes
-     UseKeychain yes
-     IdentityFile ~/.ssh/$ssh_filename" >>~/.ssh/config
-  else
-    ssh-add ~/.ssh/"$ssh_filename"
-  fi
-
-  read -r -p "Title for ssh key on GitHub: " title
-  gh ssh-key add ~/.ssh/"$ssh_filename".pub -t "$title"
-}
-
 main() {
   install_spaceship_prompt
   add_zsh_syntax_highlighting
@@ -110,11 +92,9 @@ main() {
   install_asdf # asdf is an oh my zsh plugin, and rust is included in asdf plugins
   install_foundry
   install_circom
-  mkdir ~/.{pyenvs,vpn}
-  gh auth login
-  gh auth refresh -s write:gpg_key
-  config_gpg
+  mkdir ~/{dev,cloud,.{pyenvs,vpn}}
   config_ssh
+  config_gpg
 }
 
 main "$@"
