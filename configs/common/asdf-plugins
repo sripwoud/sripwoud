@@ -1,3 +1,4 @@
+python
 aws-iam-authenticator https://github.com/zekker6/asdf-aws-iam-authenticator
 awscli
 dasel https://github.com/asdf-community/asdf-dasel.git main
@@ -10,6 +11,5 @@ kind https://github.com/reegnz/asdf-kind.git
 kubectl https://github.com/asdf-community/asdf-kubectl.git
 nodejs https://github.com/asdf-vm/asdf-nodejs.git
 pulumi https://github.com/canha/asdf-pulumi.git
-python
 rust https://github.com/code-lever/asdf-rust.git
 shfmt
