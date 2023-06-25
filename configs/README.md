@@ -5,7 +5,6 @@
    ```
 - MacOS:
    ```shell
-   curl https://raw.githubusercontent.com/sripwoud/sripwoud/master/configs/common/setup.sh | sh &&\
    curl https://raw.githubusercontent.com/sripwoud/sripwoud/master/configs/mac/setup.sh | sh
    ```
 
