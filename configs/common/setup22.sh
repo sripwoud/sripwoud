@@ -85,6 +85,11 @@ config_gpg() {
   read -r -p "Enter title for gpg key on GitHub: " title
   gpg --armor --export "$key_id" | gh gpg-key add -t "$title"
   curl https://github.com/web-flow.gpg | gpg --import
+
+  if [[ "$OSTYPE" == "darwin"* ]];then
+    echo "pinentry-program $(which pinentry-mac)" >> ~/.gnupg/gpg-agent.conf
+    gpgconf --kill gpg-agent
+  fi
 }
 
 main() {
