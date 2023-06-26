@@ -1,4 +1,6 @@
-set -o errexit
+#!/bin/bash
+
+set -e
 
 install_homebrew() {
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -15,7 +17,7 @@ get_mac_config_files() {
 }
 
 main() {
-  local url=https://raw.githubusercontent.com/sripwoud/sripwoud/master/configs
+  local url=https://raw.githubusercontent.com/sripwoud/sripwoud/main/configs
 
   install_homebrew
 
@@ -26,4 +28,4 @@ main() {
   sudo curl -fsS "$url"/common/setup22.sh | sh
 }
 
-main "$@"
+main

@@ -100,4 +100,4 @@ main() {
   reboot
 }
 
-main "$@"
+main

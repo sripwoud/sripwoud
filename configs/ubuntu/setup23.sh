@@ -19,4 +19,4 @@ main() {
   install_docker
 }
 
-main "$@"
+main

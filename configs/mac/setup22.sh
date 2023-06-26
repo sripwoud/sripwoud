@@ -89,4 +89,4 @@ main() {
   rm -rf /tmp/installers
 }
 
-main "$@"
+main

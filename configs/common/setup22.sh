@@ -1,3 +1,5 @@
+#!/bin/bash
+
 set -e
 
 install_spaceship_prompt() {
@@ -49,11 +51,11 @@ install_foundry() {
 
 get_common_config_files() {
   for file in .default-npm-packages .gitignore .npmrc .prettierignore .prettierrc.yaml; do
-    curl -o "$HOME/$file" -fsS "https://raw.githubusercontent.com/sripwoud/sripwoud/master/configs/common/$file"
+    curl -o "$HOME/$file" -fsS "https://raw.githubusercontent.com/sripwoud/sripwoud/main/configs/common/$file"
   done
 
   mkdir -p "${$HOME/.oh-my-zsh/custom}"/plugins/sha256
-  curl -o "${$HOME/.oh-my-zsh/custom}"/plugins/sha256/sha256.plugin.zsh -fsS "https://raw.githubusercontent.com/sripwoud/sripwoud/master/configs/common/sha256.zsh"
+  curl -o "${$HOME/.oh-my-zsh/custom}"/plugins/sha256/sha256.plugin.zsh -fsS "https://raw.githubusercontent.com/sripwoud/sripwoud/main/configs/common/sha256.zsh"
 }
 
 config_ssh() {
@@ -97,4 +99,4 @@ main() {
   config_gpg
 }
 
-main "$@"
+main

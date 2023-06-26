@@ -18,7 +18,7 @@ get_ubuntu_config_files() {
 }
 
 main() {
-  local url=https://raw.githubusercontent.com/sripwoud/sripwoud/master/configs
+  local url=https://raw.githubusercontent.com/sripwoud/sripwoud/main/configs
   install_apt_pkgs
 
   chsh -s "$(which zsh)"
@@ -30,4 +30,4 @@ main() {
   sudo curl -fsS "$url"/common/setup22.sh | sh
 }
 
-main "$@"
+main
