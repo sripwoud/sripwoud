@@ -1,6 +1,6 @@
 alias busyports='lsof -i'
 alias -g clip="| xsel -ib"
-alias compresspdf=ps2pdf -dPDFSETTINGS=/screen
+alias compresspdf="ps2pdf -dPDFSETTINGS=/screen"
 alias discord='flatpak run com.discordapp.Discord'
 alias fly=flyctl
 alias fmtsh='shfmt -i 2 -w'
