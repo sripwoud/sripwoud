@@ -2,6 +2,7 @@ alias busyports="lsof -i"
 alias -g clip="| xsel -ib"
 alias compresspdf="ps2pdf -dPDFSETTINGS=/ebook"
 alias discord="flatpak run com.discordapp.Discord"
+alias grf="git update-ref -d HEAD"
 alias fly=flyctl
 alias fmtsh="shfmt -i 2 -w"
 alias plm=pulumi
