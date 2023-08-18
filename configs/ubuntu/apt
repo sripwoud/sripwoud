@@ -8,7 +8,9 @@ gnome-software-plugin-flatpak
 git
 gnome-tweaks
 gnupg-agent
+icu-devtools
 libbz2-dev
+libcurl4-openssl-dev
 libffi-dev
 liblzma-dev
 libncursesw5-dev
@@ -17,12 +19,14 @@ libsqlite3-dev
 libssl-dev
 libxml2-dev
 libxmlsec1-dev
+linux-headers-6.2.0-26-generic
 pinentry-gnome3
 jq
 ps2pdf
 ripgrep
 rsync
 tilix
+uuid-dev
 unar
 tk-dev
 xsel
