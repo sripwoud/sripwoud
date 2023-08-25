@@ -9,6 +9,7 @@ git
 gnome-tweaks
 gnupg-agent
 icu-devtools
+jq
 libbz2-dev
 libcurl4-openssl-dev
 libffi-dev
@@ -20,8 +21,8 @@ libssl-dev
 libxml2-dev
 libxmlsec1-dev
 linux-headers-6.2.0-26-generic
+mysql-client
 pinentry-gnome3
-jq
 ps2pdf
 ripgrep
 rsync
