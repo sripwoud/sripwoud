@@ -4,6 +4,7 @@ alias edit='open -a "TextEdit"'
 alias fly=flyctl
 alias fmtsh='shfmt -i 2 -w'
 alias grf='git update-ref -d HEAD'
+alias j=just
 alias plm=pulumi
 alias pn=pnpm
 alias reloadzsh="source ~/.zshrc"

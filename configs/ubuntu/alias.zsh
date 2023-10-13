@@ -5,6 +5,7 @@ alias discord="flatpak run com.discordapp.Discord"
 alias grf="git update-ref -d HEAD"
 alias fly=flyctl
 alias fmtsh="shfmt -i 2 -w"
+alias j=just
 alias plm=pulumi
 alias pn=pnpm
 alias reloadzsh="source ~/.zshrc"
