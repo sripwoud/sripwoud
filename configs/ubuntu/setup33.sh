@@ -67,6 +67,8 @@ clean_up() {
 
 main() {
   local url=https://raw.githubusercontent.com/sripwoud/sripwoud/main/configs/ubuntu
+  local arch=$(dpkg --print-architecture)
+  local release=$(lsb_release -cs)
   # Grant permissions for docker process and file levels
   sudo chmod a+rwx /var/run/docker.sock
   sudo chmod a+rwx /var/run/docker.pid
@@ -77,10 +79,13 @@ main() {
   echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
 
   curl -fsS https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmor --yes --output /usr/share/keyrings/oracle-virtualbox-2016.gpg
-  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/oracle-virtualbox-2016.gpg] https://download.virtualbox.org/virtualbox/debian $(lsb_release -cs) contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
+  echo "deb [arch=$arch signed-by=/usr/share/keyrings/oracle-virtualbox-2016.gpg] https://download.virtualbox.org/virtualbox/debian $release contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
 
   curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor --yes --output /usr/share/keyrings/hashicorp-archive-keyring.gpg
-  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+  echo "deb [arch=$arch signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $release main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+  
+  curl -fsSL https://swupdate.openvpn.net/repos/openvpn-repo-pkg-key.pub | sudo gpg --dearmor --yes --output /usr/share/keyrings/openvpn-repo-pkg-keyring.gpg
+  echo "deb [arch=$arch signed-by=/usr/share/keyrings/openvpn-repo-pkg-keyring.gpg] https://swupdate.openvpn.net/community/openvpn3/repos $release main" | sudo tee /etc/apt/sources.list.d/openvpn3.list
 
   sudo apt update
   sudo apt install brave-browser virtualbox-6.1 vagrant -y
