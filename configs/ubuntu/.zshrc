@@ -63,6 +63,7 @@ ZSH_THEME="spaceship"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
  asdf
+ compresspdfs
  cp
  dotenv
  gcloud
@@ -78,4 +79,3 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-
