@@ -1,6 +1,6 @@
-python
 aws-iam-authenticator https://github.com/zekker6/asdf-aws-iam-authenticator
 awscli
+bun
 dasel https://github.com/asdf-community/asdf-dasel.git main
 flyctl flyctl https://github.com/chessmango/asdf-flyctl.git
 gcloud https://github.com/jthegedus/asdf-gcloud
@@ -10,7 +10,9 @@ helm https://github.com/Antiarchitect/asdf-helm.git
 kind https://github.com/reegnz/asdf-kind.git
 kubectl https://github.com/asdf-community/asdf-kubectl.git
 nodejs https://github.com/asdf-vm/asdf-nodejs.git
+poetry https://github.com/asdf-community/asdf-poetry.git
 postgres
 pulumi https://github.com/canha/asdf-pulumi.git
+python
 rust https://github.com/code-lever/asdf-rust.git
 shfmt
