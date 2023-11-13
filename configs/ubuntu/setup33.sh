@@ -13,6 +13,11 @@ install_flatpak_apps() {
   rm "$tmp_file"
 }
 
+install_fira_code_font() {
+  url=$(curl -s https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest | jq -r '.assets[] | select(.name == "FiraCode.tar.xz").browser_download_url')
+  curl -fsSL "$url" | tar xJf - -C ~/.local/share/fonts
+}
+
 install_jetbrains_toolbox() {
   filename=jetbrains-toolbox
   url=$(curl -sG "https://data.services.jetbrains.com/products/releases" -d "code=TBA" -d "latest=true" | dasel -r json "TBA.[0].downloads.linux.link" | tr -d '"')
@@ -67,8 +72,10 @@ clean_up() {
 
 main() {
   local url=https://raw.githubusercontent.com/sripwoud/sripwoud/main/configs/ubuntu
-  local arch=$(dpkg --print-architecture)
-  local release=$(lsb_release -cs)
+  local arch
+  arch=$(dpkg --print-architecture)
+  local release
+  release=$(lsb_release -cs)
   # Grant permissions for docker process and file levels
   sudo chmod a+rwx /var/run/docker.sock
   sudo chmod a+rwx /var/run/docker.pid
