@@ -3,6 +3,7 @@
 set -e
 shopt -s extglob
 
+# TODO replace by fira code nerd font https://www.nerdfonts.com/font-downloads
 install_fira_code_font() {
   curl -fsSL https://github.com/tonsky/FiraCode/releases/download/6.2/Fira_Code_v6.2.zip -o /tmp/Fira_Code_v6.2.zip
   unzip /tmp/Fira_Code_v6.2.zip -d /tmp/Fira_Code_v6.2 >/dev/null
