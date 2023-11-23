@@ -1,6 +1,9 @@
 export ZSH="$HOME/.oh-my-zsh"
 
+# zstyle ':omz:update' mode disabled  # disable automatic updates
 zstyle ':omz:update' mode auto      # update automatically without asking
+# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+
 
 ENABLE_CORRECTION="true"
 
@@ -13,8 +16,8 @@ plugins=(
   macos
   sudo
   z
-  zsh-syntax-highlighting
-)
+  zsh-autosuggestions
+  zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
