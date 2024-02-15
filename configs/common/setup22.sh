@@ -50,8 +50,12 @@ install_foundry() {
 }
 
 get_common_config_files() {
-  for file in .default-npm-packages .gitignore .npmrc .prettierignore .prettierrc.yaml; do
-    curl -o "$HOME/$file" -fsS "https://raw.githubusercontent.com/sripwoud/sripwoud/main/configs/common/$file"
+  for file in .default-npm-packages .npmrc; do
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+      curl -o "$HOME/$file" -fsS "https://raw.githubusercontent.com/sripwoud/sripwoud/main/configs/mac/$file"
+    else
+      curl -o "$HOME/$file" -fsS "https://raw.githubusercontent.com/sripwoud/sripwoud/main/configs/ubuntu/$file"
+    fi
   done
 
   mkdir -p "${$HOME/.oh-my-zsh/custom}"/plugins/sha256

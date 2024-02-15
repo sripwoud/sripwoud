@@ -1,6 +1,13 @@
 export ZSH="$HOME/.oh-my-zsh"
-export PATH=/opt/bin:$PATH
-export PATH="$PATH:/home/tpwd/.foundry/bin"
+export PNPM_HOME="$HOME/username/.local/share/pnpm"
+export IMMICH_CONFIG_DIR="$HOME/.config/immich"
+
+export PATH="/opt/bin:$PATH:/home/username/.foundry/bin"
+
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
 
 # User configuration
 

@@ -2,15 +2,27 @@
 
 set -e
 
+add_ppa() {
+  if ! grep -h "deb.*$1" /etc/apt/sources.list.d/* > /dev/null 2>&1;
+   then
+    echo "Adding ppa:$1"
+    sudo add-apt-repository -y "ppa:$1"
+    return 0
+  else
+    echo "ppa:$1 already exists"
+    return 1
+  fi
+}
+
 install_apt_pkgs() {
-  sudo add-apt-repository universe # required for fira-code font
-  sudo add-apt-repository ppa:appimagelauncher-team/stable
+  add_ppa universe # required for fira-code font
+  add_ppa ppa:appimagelauncher-team/stable
   sudo apt update
   curl -fsS "$url"/ubuntu/apt | sudo xargs apt install -y
 }
 
 get_ubuntu_config_files() {
-  for file in .gitconfig .zshenv .zshrc; do
+  for file in .gitconfig .gitignore .zshenv .zshrc; do
     curl -o "$HOME/$file" -fsS "$url/ubuntu/$file"
   done
 

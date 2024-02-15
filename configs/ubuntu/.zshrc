@@ -1,22 +1,22 @@
-zstyle ':omz:update' mode auto      # update automatically without asking
-ENABLE_CORRECTION="true"
+export ZSH="$HOME/.oh-my-zsh"
+
+# ZSH_THEME=""
 
 plugins=(
- asdf
- compresspdfs
- cp
- dotenv
- gcloud
- git
- gh
- history
- kubectl
- sha256
- sudo
- ubuntu # apt aliases
- z
- zsh-syntax-highlighting 
-)
+  asdf
+  compresspdfs
+  cp
+  dotenv
+  gh
+  git
+  iphone
+  sha256
+  sudo
+  ubuntu
+  z
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  )
 
 source $ZSH/oh-my-zsh.sh
 
