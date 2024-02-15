@@ -1,9 +1,13 @@
 com.calibre_ebook.calibre
 org.chromium.Chromium 
 com.discordapp.Discord
+io.gitlab.news_flash.NewsFlash
 com.github.jeromerobert.pdfarranger
 org.gnome.DejaDup
 rest.insomnia.Insomnia
-org.standardnotes.standardnotes
-us.zoom.Zoom
+org.localsend.localsend_app
+de.haeckerfelix.Shortwave
+net.hovancik.Stretchly
+org.mozilla.Thunderbird
+org.videolan.VLC
 
