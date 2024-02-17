@@ -14,7 +14,7 @@ install_flatpak_apps() {
   flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
   tmp_file=$(mktemp)
-  curl -fsS "$url"/flatpakrefs >"$tmp_file"
+  curl -fsS "$url"/manjaro/flatpakrefs >"$tmp_file"
   while read -r flatpakref; do
     flatpak install -y "$flatpakref"
   done <"$tmp_file"
