@@ -13,13 +13,9 @@ get_manjaro_config_files() {
 main() {
   local url=https://raw.githubusercontent.com/sripwoud/sripwoud/main/configs
 
-  chsh -s "$(which zsh)"
-
-  # oh my zsh
-  sudo curl -fsS "$url"/common/setup12.sh | sh
+  # asdf, foundry, config ssh & gpg
+  sudo curl -fsS "$url"/common/setup.sh | sh
   get_manjaro_config_files
-  # asdf, circom, foundry, config files, gpg setup, ssh setup
-  sudo curl -fsS "$url"/common/setup22.sh | sh
 }
 
 main
