@@ -48,16 +48,6 @@ install_keybase() {
   # sudo apt-key del <keylast8digits>
 }
 
-fix_discord() {
-  cat >"$HOME"/.var/app/com.discordapp.Discord/config/discord/settings.json <<EOF
-{
-  "SKIP_HOST_UPDATE": true,
-  "MIN_WIDTH": 100,
-  "MIN_HEIGHT": 100,
-}
-EOF
-}
-
 clean_up() {
   sudo apt remove apport apport-system
   sudo apt autoremove -y
