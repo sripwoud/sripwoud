@@ -41,8 +41,8 @@ install_jetbrains_toolbox() {
 }
 
 install_nordvpn() {
-  sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh)
-  #  usermod -aG nordvpn "$USER"
+  pacmac build nordvpn-bin
+  sudo usermod -aG nordvpn "$USER"
 }
 
 install_keybase() {
