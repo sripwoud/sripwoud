@@ -2,12 +2,12 @@
 
 set -e
 
-get_ubuntu_config_files() {
+get_manjaro_config_files() {
   for file in .gitconfig .gitignore .zshenv .zshrc; do
-    curl -o "$HOME/$file" -fsS "$url/ubuntu/$file"
+    curl -o "$HOME/$file" -fsS "$url/manjaro/$file"
   done
 
-  curl -o "$HOME/.oh-my-zsh/custom/alias.zsh" -fsS "$url/ubuntu/alias.zsh"
+  curl -o "$ZSH_CUSTOM/alias.zsh" -fsS "$url/manjaro/alias.zsh"
 }
 
 main() {
@@ -17,7 +17,7 @@ main() {
 
   # oh my zsh
   sudo curl -fsS "$url"/common/setup12.sh | sh
-  get_ubuntu_config_files
+  get_manjaro_config_files
   # asdf, circom, foundry, config files, gpg setup, ssh setup
   sudo curl -fsS "$url"/common/setup22.sh | sh
 }

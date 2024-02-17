@@ -71,7 +71,7 @@ clean_up() {
 }
 
 main() {
-  local url=https://raw.githubusercontent.com/sripwoud/sripwoud/main/configs/ubuntu
+  local url=https://raw.githubusercontent.com/sripwoud/sripwoud/main/configs/manjaro
   local arch
   arch=$(dpkg --print-architecture)
   local release
