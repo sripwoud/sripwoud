@@ -10,10 +10,8 @@ plugins=(
   iphone
   sha256
   sudo
-  ubuntu
   z
   zsh-autosuggestions
-  zsh-syntax-highlighting
   )
 
 source $ZSH/oh-my-zsh.sh
