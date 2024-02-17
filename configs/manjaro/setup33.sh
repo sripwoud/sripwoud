@@ -48,13 +48,6 @@ install_keybase() {
   # sudo apt-key del <keylast8digits>
 }
 
-clean_up() {
-  sudo apt remove apport apport-system
-  sudo apt autoremove -y
-  snap remove firefox snap-store
-  sudo apt purge snapd
-}
-
 main() {
   local url=https://raw.githubusercontent.com/sripwoud/sripwoud/main/configs/manjaro
   local arch
@@ -85,8 +78,6 @@ main() {
   install_jetbrains_toolbox
   install_vagrant
   install_virtualbox
-
-  clean_up
 
   sudo update-alternatives --config x-terminal-emulator
 
