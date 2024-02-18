@@ -56,6 +56,18 @@ install_keybase() {
   # sudo apt-key del <keylast8digits>
 }
 
+install_superproductivity() {
+  url=$(gh api \
+    -H "Accept: application/vnd.github+json" \
+    -H "X-GitHub-Api-Version: 2022-11-28" \
+    /repos/johannesjo/super-productivity/releases \
+  | dasel -r json "[0].assets.all().browser_download_url" \
+  | grep -E "\.AppImage\"$" \
+  | tr -d '"')
+
+  wget --content-disposition -P "$HOME/Downloads" "$url"
+}
+
 main() {
   local url=https://raw.githubusercontent.com/sripwoud/sripwoud/main/configs
 
