@@ -1,2 +1,7 @@
-install lsof
 build brave-bin
+install emacs
+install fd
+install lsof
+install make
+install pkg-config
+install ripgrep
