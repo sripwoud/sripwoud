@@ -7,7 +7,7 @@ get_manjaro_config_files() {
     curl -o "$HOME/$file" -fsS "$url/manjaro/$file"
   done
 
-  curl -o "$ZSH_CUSTOM/alias.zsh" -fsS "$url/manjaro/alias.zsh"
+  wget -o "$ZDOTDIR/alias" "$url/manjaro/alias"
 }
 
 #get_appimage_url_from_github() {
