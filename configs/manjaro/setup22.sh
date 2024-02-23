@@ -67,25 +67,6 @@ install_apps() {
   done
 }
 
-install_jetbrains_toolbox() {
-  filename=jetbrains-toolbox
-  url=$(curl -sG "https://data.services.jetbrains.com/products/releases" -d "code=TBA" -d "latest=true" | dasel -r json "TBA.[0].downloads.linux.link" | tr -d '"')
-  curl -o "$filename"_archive -fsSL "$url"
-  tar xf "$filename"_archive --strip-components 1
-
-  mkdir -p /opt/bin
-  sudo mv $filename /opt/bin/$filename
-  rm "$filename"_archive
-
-  # increase inotify watches limit
-  # https://youtrack.jetbrains.com/articles/IDEA-A-2/Inotify-Watches-Limit-Linux
-  sudo echo "fs.inotify.max_user_watches = 524288" >/etc/sysctl.d/idea.conf
-  sudo sysctl -p --system
-
-  # after pycharm install
-  # sudo ln -s ~/.local/share/JetBrains/toolbox/scripts/pycharm /opt/bin/pycharm
-}
-
 install_nordvpn() {
   pacmac build nordvpn-bin
   sudo usermod -aG nordvpn "$USER"
@@ -134,16 +115,17 @@ main() {
 
   sudo apt update
   sudo apt install brave-browser virtualbox-6.1 vagrant -y
-  install_flatpak_apps
   install_fira_code_font
   install_nordvpn
   install_jetbrains_toolbox
   install_vagrant
   install_virtualbox
-
+  install_custom_functions
   # setup gnome keyring to save ssh passphrases
   systemctl --user enable --now gcr-ssh-agent.socket
-
+  mkdir .log
+  touch .log/cron.log
+  # todo: define backup script, set up crontab to run it, setup logrotate config file, setup crontab to run logrotate 
   echo "###### REBOOTING IN 5S #######"
   sleep 5
   reboot
