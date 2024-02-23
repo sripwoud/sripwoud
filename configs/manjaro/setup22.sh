@@ -10,58 +10,49 @@ get_manjaro_config_files() {
   curl -o "$ZSH_CUSTOM/alias.zsh" -fsS "$url/manjaro/alias.zsh"
 }
 
-get_appimage_url_from_github() {
-  local org_repo=$1
-  gh api \
-    -H "Accept: application/vnd.github+json" \
-    -H "X-GitHub-Api-Version: 2022-11-28" \
-    /repos/"$org_repo"/releases |
-    dasel -r json "[0].assets.all().browser_download_url" |
-    grep -E "\.AppImage\"$" |
-    tr -d '"'
-}
+#get_appimage_url_from_github() {
+#  local org_repo=$1
+#  gh api \
+#    -H "Accept: application/vnd.github+json" \
+#    -H "X-GitHub-Api-Version: 2022-11-28" \
+#    /repos/"$org_repo"/releases |
+#    dasel -r json "[0].assets.all().browser_download_url" |
+#    grep -E "\.AppImage\"$" |
+#    tr -d '"'
+#}
 
-install_pamac_pkg() {
-  local pkg=$1
-  if [[ $pkg == *"bin" ]]; then
-    sudo pamac build "$pkg" -y
-  else
-    sudo pamac install "$pkg" -y
-  fi
-}
+#install_appimage() {
+#  local identifier=$1
+#  if [[ $identifier == "https"* ]]; then
+#    url=$identifier
+#  else
+#    url=$(get_appimage_url_from_github "$identifier")
+#  fi
+#  wget "$url" 2>&1 | tee wget.log
+#  app=$(grep -oP "(?<=Saving to: ‘).*(?=.AppImage’)" wget.log)
+#  ail-cli integrate "$app.AppImage"
+#}
 
-install_appimage() {
-  local identifier=$1
-  if [[ $identifier == "https"* ]]; then
-    url=$identifier
-  else
-    url=$(get_appimage_url_from_github "$identifier")
-  fi
-  wget "$url" -o "wget.log"
-  app=$(grep -oP "(?<=Saving to: ‘).*(?=.AppImage’)" wget.log)
-  ail-cli integrate "$app.AppImage"
+install_joplin () {
+  wget -O - https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_and_update.sh | bash
 }
 
 install_apps() {
-  flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-
-  for cli in ail cargo flatpak pamac;do
+  #for cli in ail cargo pamac;do
+  for cli in cargo pamac;do
     tmp_file=$(mktemp)
     wget -O "$tmp_file" "$url/manjaro/apps/$cli"
 
     while read -r app; do
       case $cli in
-      ail)
-        install_appimage "$app"
-        ;;
+      #ail)
+      #  install_appimage "$app"
+      #  ;;
       cargo)
         cargo install "$app"
         ;;
-      flatpak)
-        flatpak install -y "$app"
-        ;;
       pamac)
-        install_pamac_pkg "$app"
+       pamac install "$app"
         ;;
       esac
 
@@ -105,7 +96,10 @@ install_keybase() {
   # sudo apt-key del <keylast8digits>
 }
 
-
+install_joplin_cli() {
+  NPM_CONFIG_PREFIX=~/.local/bin/joplin-bin npm install -g joplin
+  ln -s ~/.local/bin/joplin-bin/joplin "$HOME"/.local/bin
+}
 
 
 main() {
