@@ -10,6 +10,12 @@ get_manjaro_config_files() {
   wget -o "$ZDOTDIR/alias" "$url/manjaro/alias"
 }
 
+install_custom_functions()  {
+  for fn in sha256 compresspdfs;do
+    wget -O "$ZDOTDIR/config.d/$fn.sh" "$url/common/functions/$fn.sh"
+  done
+}
+
 #get_appimage_url_from_github() {
 #  local org_repo=$1
 #  gh api \

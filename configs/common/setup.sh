@@ -24,6 +24,10 @@ install_asdf() {
   rm "$tmp_file"
 }
 
+config_rust() {
+  rustup component add rust-analyzer rust-src
+}
+
 install_circom() {
   temp_dir=$(mktemp -d)
   git clone https://github.com/iden3/circom.git "$temp_dir"
@@ -48,9 +52,6 @@ get_common_config_files() {
       curl -o "$HOME/$file" -fsS "https://raw.githubusercontent.com/sripwoud/sripwoud/main/configs/manjaro/$file"
     fi
   done
-
-  mkdir -p "${$HOME/.oh-my-zsh/custom}"/plugins/sha256
-  curl -o "${$HOME/.oh-my-zsh/custom}"/plugins/sha256/sha256.plugin.zsh -fsS "https://raw.githubusercontent.com/sripwoud/sripwoud/main/configs/common/sha256.zsh"
 }
 
 config_ssh() {
@@ -90,6 +91,7 @@ config_gpg() {
 main() {
   get_common_config_files
   install_asdf # asdf is an oh my zsh plugin, and rust is included in asdf plugins
+  config_rust
   install_foundry
 #  install_circom
   mkdir ~/{dev,filen,.{pyenvs,vpn}}
