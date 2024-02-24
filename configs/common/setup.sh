@@ -3,11 +3,11 @@
 set -e
 
 install_asdf() {
-  git clone https://github.com/asdf-vm/asdf.git ~/.asdf
+  git clone --depth 1 https://github.com/asdf-vm/asdf.git ~/.config/asdf
   touch ~/.tool-versions
 
   tmp_file=$(mktemp)
-  curl -fsS https://raw.githubusercontent.com/sripwoud/sripwoud/main/configs/common/asdf-plugins >"$tmp_file"
+  wget -O "$tmp_file" https://raw.githubusercontent.com/sripwoud/sripwoud/main/configs/common/asdf-plugins
 
   while read -r line; do
     read -ra args <<< "$line"
@@ -15,7 +15,7 @@ install_asdf() {
     url=${args[1]}
     branch=${args[2]}
 
-    [[ -n $url ]] && asdf plugin add "$plugin" "$url" | asdf plugin add "$plugin"
+    [[ -n $url ]] && asdf plugin add "$plugin" "$url" || asdf plugin add "$plugin"
     [[ -n $branch ]] && asdf plugin update "$plugin" "$branch"
     asdf install "$plugin" latest
     asdf global "$plugin" latest
