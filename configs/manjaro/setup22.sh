@@ -122,6 +122,7 @@ main() {
   install_vagrant
   install_virtualbox
   install_custom_functions
+  sudo pamac remove --no-confirm firefox
   # setup gnome keyring to save ssh passphrases
   systemctl --user enable --now gcr-ssh-agent.socket
   mkdir .log
