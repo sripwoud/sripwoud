@@ -44,6 +44,7 @@ install_joplin () {
 }
 
 install_apps() {
+  sudo sed -i 's/#EnableAUR/EnableAUR/' /etc/pamac.conf
   #for cli in ail cargo pamac;do
   for cli in cargo pamac;do
     tmp_file=$(mktemp)
