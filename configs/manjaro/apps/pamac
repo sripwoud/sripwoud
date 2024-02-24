@@ -1,4 +1,3 @@
-appimagelauncher
 base-devel
 beeper-latest-bin
 brave-bin
@@ -6,6 +5,7 @@ calibre
 discord
 emacs
 fd
+filen-desktop-appimage
 ghostscript
 gnome-keyring
 imgcat
