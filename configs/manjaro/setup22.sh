@@ -58,7 +58,7 @@ install_apps() {
         cargo install "$app"
         ;;
       pamac)
-       pamac install "$app"
+       sudo pamac install --no-confirm "$app"
         ;;
       esac
 
