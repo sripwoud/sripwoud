@@ -69,8 +69,14 @@ install_apps() {
 }
 
 install_nordvpn() {
-  pacmac build nordvpn-bin
+  pamac install nordvpn-bin
   sudo usermod -aG nordvpn "$USER"
+}
+
+install_foundry() {
+  curl -L https://foundry.paradigm.xyz | bash
+  source "ZDOTDIR/.zshenv"
+  foundryup
 }
 
 install_keybase() {
