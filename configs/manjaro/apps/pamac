@@ -3,7 +3,7 @@ beeper-latest-bin
 brave-bin
 calibre
 discord
-emacs
+emacs-nativecomp
 fd
 filen-desktop-appimage
 ghostscript
@@ -26,3 +26,4 @@ superproductivity-bin
 thunderbird
 trezor-bridge-bin
 youtube-tui
+yt-dlp
