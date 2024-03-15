@@ -2,18 +2,18 @@
 
 set -e
 
+post_docker_install() {
+  # Grant permissions for docker process and file levels
+  sudo chmod a+rwx /var/run/docker.sock
+  sudo chmod a+rwx /var/run/docker.pid
+}
+
 get_manjaro_config_files() {
   for file in .gitconfig .gitignore .zshenv .zshrc; do
     curl -o "$HOME/$file" -fsS "$url/manjaro/$file"
   done
 
   wget -o "$ZDOTDIR/alias" "$url/manjaro/alias"
-}
-
-install_custom_functions()  {
-  for fn in sha256 compresspdfs;do
-    wget -O "$ZDOTDIR/config.d/$fn.sh" "$url/common/functions/$fn.sh"
-  done
 }
 
 #get_appimage_url_from_github() {
@@ -39,8 +39,13 @@ install_custom_functions()  {
 #  ail-cli integrate "$app.AppImage"
 #}
 
-install_joplin () {
+install_joplin_gui () {
   wget -O - https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_and_update.sh | bash
+}
+
+install_joplin_cli() {
+  NPM_CONFIG_PREFIX=~/.local/bin/joplin-bin npm install -g joplin
+  ln -s ~/.local/bin/joplin-bin/joplin "$HOME"/.local/bin
 }
 
 install_apps() {
@@ -79,58 +84,24 @@ install_foundry() {
   foundryup
 }
 
-install_keybase() {
-  curl --remote-name https://prerelease.keybase.io/keybase_amd64.deb
-  sudo apt install ./keybase_amd64.deb -y
-  rm keybase_amd64.deb
-  # FIXME: this installs keybase using the deprecated keyring
-  # needs to do
-  # sudo apt-key list
-  # sudo apt-key export <keylast8digits> | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/keybase.gpg
-  # sudo apt-key del <keylast8digits>
-}
-
-install_joplin_cli() {
-  NPM_CONFIG_PREFIX=~/.local/bin/joplin-bin npm install -g joplin
-  ln -s ~/.local/bin/joplin-bin/joplin "$HOME"/.local/bin
-}
-
-
 main() {
+  #post_docker_install
   local url=https://raw.githubusercontent.com/sripwoud/sripwoud/main/configs
 
   # asdf, foundry, config ssh & gpg
   sudo curl -fsS "$url"/common/setup.sh | sh
+  
   get_manjaro_config_files
-  ###### FIXME
-  local arch
-  arch=$(dpkg --print-architecture)
-  local release
-  release=$(lsb_release -cs)
-  # Grant permissions for docker process and file levels
-  sudo chmod a+rwx /var/run/docker.sock
-  sudo chmod a+rwx /var/run/docker.pid
 
-  curl -fsS https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmor --yes --output /usr/share/keyrings/oracle-virtualbox-2016.gpg
-  echo "deb [arch=$arch signed-by=/usr/share/keyrings/oracle-virtualbox-2016.gpg] https://download.virtualbox.org/virtualbox/debian $release contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
-
-  curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor --yes --output /usr/share/keyrings/hashicorp-archive-keyring.gpg
-  echo "deb [arch=$arch signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $release main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-
-  curl -fsSL https://swupdate.openvpn.net/repos/openvpn-repo-pkg-key.pub | sudo gpg --dearmor --yes --output /usr/share/keyrings/openvpn-repo-pkg-keyring.gpg
-  echo "deb [arch=$arch signed-by=/usr/share/keyrings/openvpn-repo-pkg-keyring.gpg] https://swupdate.openvpn.net/community/openvpn3/repos $release main" | sudo tee /etc/apt/sources.list.d/openvpn3.list
-
-  sudo apt update
-  sudo apt install brave-browser virtualbox-6.1 vagrant -y
-  install_fira_code_font
-  install_nordvpn
-  install_jetbrains_toolbox
-  install_vagrant
-  install_virtualbox
-  install_custom_functions
+  install_apps
+  install_joplin_gui
+  install_joplin_cli
+  
   sudo pamac remove --no-confirm firefox
+  
   # setup gnome keyring to save ssh passphrases
   systemctl --user enable --now gcr-ssh-agent.socket
+  
   mkdir .log
   touch .log/cron.log
   # todo: define backup script, set up crontab to run it, setup logrotate config file, setup crontab to run logrotate 
