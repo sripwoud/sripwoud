@@ -16,6 +16,7 @@ install_asdf_plugins_and_apps() {
 
     [[ -n $url ]] && asdf plugin add "$plugin" "$url" || asdf plugin add "$plugin"
     [[ -n $branch ]] && asdf plugin update "$plugin" "$branch"
+    [[ $plugin == "flyctl" ]] && continue
     asdf install "$plugin" latest
     asdf global "$plugin" latest
   done <"$tmp_file"
