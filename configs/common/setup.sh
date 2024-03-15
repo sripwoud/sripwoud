@@ -2,8 +2,7 @@
 
 set -e
 
-install_asdf() {
-  git clone --depth 1 https://github.com/asdf-vm/asdf.git ~/.config/asdf
+install_asdf_plugins_and_apps() {
   touch ~/.tool-versions
 
   tmp_file=$(mktemp)
