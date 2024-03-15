@@ -97,7 +97,7 @@ main() {
   install_joplin_gui
   install_joplin_cli
   
-  sudo pamac remove --no-confirm firefox
+  sudo pamac remove --no-confirm appimagelauncher firefox
   
   # setup gnome keyring to save ssh passphrases
   systemctl --user enable --now gcr-ssh-agent.socket
