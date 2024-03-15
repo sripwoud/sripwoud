@@ -10,6 +10,7 @@ fd
 ghostscript
 gnome-keyring
 imgcat
+js-beautify
 localsend-bin
 lsof
 make
@@ -24,6 +25,8 @@ ripgrep
 shellcheck
 shortwave
 superproductivity-bin
+stylelint
 thunderbird
+tidy
 trezor-bridge-bin
 youtube-tui
