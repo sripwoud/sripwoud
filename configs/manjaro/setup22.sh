@@ -84,6 +84,10 @@ install_foundry() {
   foundryup
 }
 
+install_youtube_tui() {
+  cargo install --git https://github.com/siriusmart/youtube-tui
+}
+
 main() {
   #post_docker_install
   local url=https://raw.githubusercontent.com/sripwoud/sripwoud/main/configs
@@ -96,6 +100,7 @@ main() {
   install_apps
   install_joplin_gui
   install_joplin_cli
+  install_youtube_tui
   
   sudo pamac remove --no-confirm appimagelauncher firefox
   
