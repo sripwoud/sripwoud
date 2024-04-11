@@ -2,8 +2,8 @@
 
 
 <p align="center">
-    <img alt="GH Stats" src="https://github-readme-stats.vercel.app/api/top-langs?username=sripwoud&count_private=true&hide=html,jupyter+notebook,tex,css,vue,scss&locale=en&layout=compact&hide_border=true&hide_title=true&text_color=d000e8">
-    <img alt="GH Top Languages" src="https://github-readme-stats.vercel.app/api?username=sripwoud&include_all_commits=true&count_private=true&hide_title=true&hide_border=true&show_icons=true&icon_color=908dff&title_color=120548&text_color=d000e8&hide=contribs,issues">
+    <img alt="GH Top Languages" src="https://github-readme-stats.vercel.app/api/top-langs?username=sripwoud&count_private=true&hide=html,jupyter+notebook,LARBStex,css,vue,scss&locale=en&layout=compact&hide_border=true&hide_title=true&text_color=d000e8&exclude_repo=buy-me-a-coffee,dapp-template,nft-dynamic,nft-dynamic-oracle,nft,solidity-unordered-key-set,exercism,decentralized_house_listing,airChain,channels-raidar">
+    <img alt="GH Stats" src="https://github-readme-stats.vercel.app/api?username=sripwoud&include_all_commits=true&count_private=true&hide_title=true&hide_border=true&show_icons=true&icon_color=908dff&title_color=120548&text_color=d000e8&hide=contribs,issues">
 </p>
 
 
