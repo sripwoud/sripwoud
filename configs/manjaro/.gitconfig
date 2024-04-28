@@ -1,9 +1,0 @@
-[user]
-	name = sripwoud
-	email = me@sripwoud.xyz
-[pull]
-	ff = only
-[init]
-	defaultBranch = main
-[commit]
-        gpgsign = true
