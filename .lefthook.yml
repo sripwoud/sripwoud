@@ -1,0 +1,8 @@
+assert_lefthook_installed: true
+output: [execution, failure, summary]
+pre-commit:
+  parallel: true
+  commands:
+    format:
+      run: dprint fmt
+      stage_fixed: true
